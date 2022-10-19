@@ -1,0 +1,14 @@
+allOf:
+  - $ref: "#/components/schemas/PriceKey"
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - price
+        properties:
+          price:
+            type: string
+            example: "0.005"

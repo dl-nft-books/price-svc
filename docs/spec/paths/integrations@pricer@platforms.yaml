@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Platforms
+  summary: Get platforms list
+  description: Returns a list of available platforms.
+  operationId: getPlatforms
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Platform'
+    '500':
+      description: Internal server error

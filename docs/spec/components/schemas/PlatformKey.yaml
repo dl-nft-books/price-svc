@@ -1,0 +1,12 @@
+type: object
+required:
+  - id
+  - type
+properties:
+  id:
+    type: string
+    example: "optimistic-ethereum"
+  type:
+    type: string
+    enum:
+      - "platforms"

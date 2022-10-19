@@ -1,0 +1,34 @@
+get:
+  parameters:
+    - name: 'contract'
+      in: query
+      required: true
+      schema:
+        type: string
+      example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+    - name: 'platform'
+      in: query
+      required: true
+      schema:
+        type: string
+      example: 'ethereum'
+  tags:
+      - Price
+  summary: Get price
+  description: If contract address is not specified, native token will be used.
+  operationId: getPrice
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/Price'
+    '500':
+      description: Internal server error

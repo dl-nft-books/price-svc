@@ -1,0 +1,18 @@
+log:
+  disable_sentry: true
+
+listener:
+  addr: :8000
+
+cop:
+  disabled: true
+  endpoint: "http://..."
+  upstream: "http://..."
+  service_name: price-svc
+  service_port: 80
+
+coingecko:
+  expiration: 10m
+  url: https://api.coingecko.com/api/v3 # https://pro-api.coingecko.com/api/v3 for paid plan
+  api_key: # for paid plan
+
