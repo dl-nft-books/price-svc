@@ -2,13 +2,13 @@ get:
   parameters:
     - name: 'contract'
       in: query
-      required: true
+      required: false
       schema:
         type: string
       example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
     - name: 'platform'
       in: query
-      required: false
+      required: true
       schema:
         type: string
       example: 'ethereum'
