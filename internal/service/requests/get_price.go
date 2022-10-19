@@ -25,6 +25,5 @@ func NewGetPriceRequest(r *http.Request) (GetPriceRequest, error) {
 func (r *GetPriceRequest) Validate() error {
 	return validation.Errors{
 		"platform=": validation.Validate(r.Platform, validation.Required),
-		"contract=": validation.Validate(r.Contract, validation.Required),
 	}.Filter()
 }

@@ -29,5 +29,10 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ape.Render(w, responses.GetPriceResponse(price, request.Contract))
+	key := request.Contract
+	if key == "" {
+		key = request.Platform
+	}
+
+	ape.Render(w, responses.GetPriceResponse(price, key))
 }
