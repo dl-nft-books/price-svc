@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
+	"gitlab.com/tokend/nft-books/price-svc/connector/models"
 )
 
 const (
@@ -17,7 +17,7 @@ func (c *Connector) GetPrice(platform, contract string) (models.PriceResponse, e
 
 	parsedUrl, err := url.Parse(priceEndpoint)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to parse price url")
+		return response, errors.Wrap(err, "failed to parse price url")
 	}
 
 	query := parsedUrl.Query()
@@ -27,7 +27,7 @@ func (c *Connector) GetPrice(platform, contract string) (models.PriceResponse, e
 
 	err = c.Get(parsedUrl, &response)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get price")
+		return response, errors.Wrap(err, "failed to get price")
 	}
 
 	return response, nil
