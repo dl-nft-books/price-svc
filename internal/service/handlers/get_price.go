@@ -17,8 +17,12 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cg := Coingecko(r)
-	price, err := cg.GetPrice(request.Platform, request.Contract, "usd")
+	coingeckoContract := request.Contract
+	if mockedToken, ok := MockedTokens(r)[request.Contract]; ok {
+		coingeckoContract = mockedToken
+	}
+
+	price, err := Coingecko(r).GetPrice(request.Platform, coingeckoContract, "usd")
 	if err != nil {
 		ape.Render(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get price")
@@ -34,5 +38,12 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		key = request.Platform
 	}
 
-	ape.Render(w, responses.GetPriceResponse(price, key))
+	erc20Data, err := EthReader(r).GetErc20Data(common.HexToAddress(request.Contract))
+	if err != nil {
+		ape.Render(w, problems.InternalError())
+		Log(r).WithError(err).Error("failed to get erc20 from the contract")
+		return
+	}
+
+	ape.Render(w, responses.GetPriceResponse(price, key, *erc20Data))
 }

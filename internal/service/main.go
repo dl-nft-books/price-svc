@@ -15,10 +15,12 @@ import (
 )
 
 type service struct {
-	log       *logan.Entry
-	copus     types.Copus
-	listener  net.Listener
-	coingecko *coingecko.Service
+	log          *logan.Entry
+	copus        types.Copus
+	listener     net.Listener
+	coingecko    *coingecko.Service
+	rpc          *ethclient.Client
+	mockedTokens map[string]string
 }
 
 func (s *service) run() error {
@@ -34,10 +36,12 @@ func (s *service) run() error {
 
 func newService(cfg config.Config) *service {
 	return &service{
-		log:       cfg.Log(),
-		copus:     cfg.Copus(),
-		listener:  cfg.Listener(),
-		coingecko: cfg.Coingecko(),
+		log:          cfg.Log(),
+		copus:        cfg.Copus(),
+		listener:     cfg.Listener(),
+		coingecko:    cfg.Coingecko(),
+		rpc:          cfg.EtherClient().Rpc,
+		mockedTokens: cfg.MockedTokens(),
 	}
 }
 

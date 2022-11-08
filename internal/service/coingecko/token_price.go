@@ -18,6 +18,9 @@ const (
 	priceKeyFormat     = "%s:%s:%s"
 )
 
+func (s *Service) GetTokenContractInfo(address common.Address) {
+}
+
 func (s *Service) GetPrice(platform, contract, vsAsset string) (string, error) {
 	priceKey := fmt.Sprintf(priceKeyFormat, platform, contract, vsAsset)
 

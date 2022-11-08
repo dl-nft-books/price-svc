@@ -1,0 +1,18 @@
+type: object
+required:
+  - decimals
+  - symbol
+  - name
+properties:
+  decimals:
+    type: integer
+    description: Token's decimals
+    example: 18
+  symbol:
+    type: string
+    description: Token's symbol
+    example: 'ETH'
+  name:
+    type: string
+    description: Token's name
+    example: 'Ethereum'
