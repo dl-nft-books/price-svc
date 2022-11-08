@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/ethereum/go-ethereum/common"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/requests"
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/responses"
 )

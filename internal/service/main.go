@@ -4,6 +4,7 @@ import (
 	"net"
 	"net/http"
 
+	"github.com/ethereum/go-ethereum/ethclient"
 	"gitlab.com/distributed_lab/kit/copus/types"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"

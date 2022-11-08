@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
 
 	"github.com/pkg/errors"
