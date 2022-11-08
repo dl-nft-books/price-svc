@@ -49,7 +49,7 @@ func CtxEthReader(reader *eth_reader.EthReader) func(context.Context) context.Co
 }
 
 func EthReader(r *http.Request) *eth_reader.EthReader {
-	return r.Context().Value(coingeckoCtxKey).(*eth_reader.EthReader)
+	return r.Context().Value(ethReaderCtxKey).(*eth_reader.EthReader)
 }
 
 func CtxMockedTokens(mockedTokens map[string]string) func(context.Context) context.Context {

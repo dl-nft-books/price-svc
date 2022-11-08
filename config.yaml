@@ -1,8 +1,9 @@
 log:
   disable_sentry: true
+  level: info
 
 listener:
-  addr: :8000
+  addr: :8005
 
 cop:
   disabled: true
@@ -16,10 +17,14 @@ coingecko:
   url: https://api.coingecko.com/api/v3 # https://pro-api.coingecko.com/api/v3 for paid plan
   api_key: # for paid plan
 
-mocked_tokens:
-  0xEe84b9D1F5320bC498d39C38Dd90242CE9E8fa34: 0xdac17f958d2ee523a2206206994597c13d831ec7
-  0xE7443eBe40ca97be34C1a40abB54B1Bd432B6C82: 0x0d8775f648430679a709e98d2b0cb6250d2887ef
-  0x3f2c8CC564A37e4be666Bb6dDCfC568Eb7DB4019: 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
+mocked:
+  tokens:
+    - actual_address: 0xEe84b9D1F5320bC498d39C38Dd90242CE9E8fa34
+      coingecko_address: 0xdac17f958d2ee523a2206206994597c13d831ec7
+    - actual_address: 0xE7443eBe40ca97be34C1a40abB54B1Bd432B6C82
+      coingecko_address: 0x0d8775f648430679a709e98d2b0cb6250d2887ef
+    - actual_address: 0x3f2c8CC564A37e4be666Bb6dDCfC568Eb7DB4019
+      coingecko_address: 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
 
 ethereum_client: # Rpc and WS addresses
   rpc: https://eth-goerli.g.alchemy.com/v2/DTb8jEsvO6jtXEwUM9Ri3k3cufBIJX-R
