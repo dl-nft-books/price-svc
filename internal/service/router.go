@@ -24,7 +24,7 @@ func (s *service) router() chi.Router {
 			handlers.CtxCoingecko(s.coingecko),
 			handlers.CtxPlatforms(platforms),
 			handlers.CtxEthReader(eth_reader.NewEthReader(s.rpc)),
-			handlers.CtxMockedTokens(s.mockedTokens),
+			handlers.CtxMockedTokens(s.mocked.Tokens),
 		),
 	)
 

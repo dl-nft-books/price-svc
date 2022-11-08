@@ -2,40 +2,51 @@ package config
 
 import (
 	"fmt"
+	"github.com/spf13/cast"
 	"gitlab.com/distributed_lab/figure"
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 	"reflect"
 )
 
-const mockedTokensYamlKey = "mocked"
+const mockedYamlKey = "mocked"
 
 type MockedToken struct {
-	ActualAddress    string `fig:"actual_address"`
-	CoingeckoAddress string `fig:"coingecko_address"`
+	ActualAddress    string `fig:"actual_address,required"`
+	CoingeckoAddress string `fig:"coingecko_address,required"`
 }
 
-func (c *config) MockedTokens() map[string]string {
+type MockedStructures struct {
+	Tokens  map[string]string
+	ChainId *int64
+}
+
+func (c *config) Mocked() MockedStructures {
 	return c.mockedTokensOnce.Do(func() interface{} {
 		cfg := struct {
-			MockedTokens []MockedToken `fig:"tokens,required"`
+			MockedTokens []MockedToken `fig:"tokens"`
+			ChainId      *int64        `fig:"chain_id"`
 		}{}
-		resultMap := make(map[string]string)
+		result := MockedStructures{
+			Tokens:  make(map[string]string),
+			ChainId: nil,
+		}
 
 		if err := figure.
 			Out(&cfg).
 			With(figure.BaseHooks, mockedTokensHook).
-			From(kv.MustGetStringMap(c.getter, mockedTokensYamlKey)).
+			From(kv.MustGetStringMap(c.getter, mockedYamlKey)).
 			Please(); err != nil {
 			panic(errors.Wrap(err, "failed to figure out mocked tokens map"))
 		}
 
 		for _, mockedToken := range cfg.MockedTokens {
-			resultMap[mockedToken.ActualAddress] = mockedToken.CoingeckoAddress
+			result.Tokens[mockedToken.ActualAddress] = mockedToken.CoingeckoAddress
 		}
+		result.ChainId = cfg.ChainId
 
-		return resultMap
-	}).(map[string]string)
+		return result
+	}).(MockedStructures)
 }
 
 var mockedTokensHook = figure.Hooks{
@@ -71,5 +82,12 @@ var mockedTokensHook = figure.Hooks{
 		default:
 			return reflect.Value{}, errors.New("unexpected type while figuring out []MockedToken")
 		}
+	},
+	"*int64": func(value interface{}) (reflect.Value, error) {
+		result, err := cast.ToInt64E(value)
+		if err != nil {
+			return reflect.Value{}, errors.Wrap(err, "failed to parse *int64")
+		}
+		return reflect.ValueOf(&result), nil
 	},
 }

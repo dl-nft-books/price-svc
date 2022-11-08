@@ -40,7 +40,7 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 
 	erc20Data, err := EthReader(r).GetErc20Data(common.HexToAddress(request.Contract))
 	if err != nil {
-		ape.Render(w, problems.InternalError())
+		ape.RenderErr(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get erc20 from the contract")
 		return
 	}

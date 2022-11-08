@@ -16,7 +16,7 @@ type Config interface {
 
 	Coingecko() *coingecko.Service
 	EtherClient() EtherClient
-	MockedTokens() map[string]string
+	Mocked() MockedStructures
 }
 
 type config struct {

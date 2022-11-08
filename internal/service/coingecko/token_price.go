@@ -29,8 +29,10 @@ func (s *Service) GetPrice(platform, contract, vsAsset string) (string, error) {
 		return price.Price, nil
 	}
 
-	var price string
-	var err error
+	var (
+		price string
+		err   error
+	)
 
 	if contract != "" {
 		price, err = s.getPriceContract(platform, contract, vsAsset)

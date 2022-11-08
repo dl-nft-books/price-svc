@@ -16,12 +16,12 @@ import (
 )
 
 type service struct {
-	log          *logan.Entry
-	copus        types.Copus
-	listener     net.Listener
-	coingecko    *coingecko.Service
-	rpc          *ethclient.Client
-	mockedTokens map[string]string
+	log       *logan.Entry
+	copus     types.Copus
+	listener  net.Listener
+	coingecko *coingecko.Service
+	rpc       *ethclient.Client
+	mocked    config.MockedStructures
 }
 
 func (s *service) run() error {
@@ -37,12 +37,12 @@ func (s *service) run() error {
 
 func newService(cfg config.Config) *service {
 	return &service{
-		log:          cfg.Log(),
-		copus:        cfg.Copus(),
-		listener:     cfg.Listener(),
-		coingecko:    cfg.Coingecko(),
-		rpc:          cfg.EtherClient().Rpc,
-		mockedTokens: cfg.MockedTokens(),
+		log:       cfg.Log(),
+		copus:     cfg.Copus(),
+		listener:  cfg.Listener(),
+		coingecko: cfg.Coingecko(),
+		rpc:       cfg.EtherClient().Rpc,
+		mocked:    cfg.Mocked(),
 	}
 }
 
@@ -62,6 +62,10 @@ func (s *service) getCoigeckoPlatforms() (*models.Platforms, error) {
 	mapped := make(map[string]string)
 	for _, platform := range platforms {
 		mapped[platform.Name] = platform.ID
+		chainIdentifier := int32(platform.ChainIdentifier)
+		if s.mocked.ChainId != nil {
+			chainIdentifier = int32(*s.mocked.ChainId)
+		}
 
 		platformsResp.Data = append(platformsResp.Data, resources.Platform{
 			Key: resources.Key{
@@ -69,7 +73,7 @@ func (s *service) getCoigeckoPlatforms() (*models.Platforms, error) {
 				Type: resources.PLATFORMS,
 			},
 			Attributes: resources.PlatformAttributes{
-				ChainIdentifier: int32(platform.ChainIdentifier),
+				ChainIdentifier: chainIdentifier,
 				Name:            platform.Name,
 				Shortname:       platform.Shortname,
 			},
