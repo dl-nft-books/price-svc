@@ -17,6 +17,8 @@ const (
 	tokenPriceEndpoint = "/simple/token_price/%s"
 	coinPriceEndpoint  = "/simple/price"
 	priceKeyFormat     = "%s:%s:%s"
+	polygonId          = "polygon-pos"
+	nativeMaticId      = "matic-network"
 )
 
 func (s *Service) GetTokenContractInfo(address common.Address) {
@@ -85,6 +87,11 @@ func (s *Service) getPriceNative(platform, vsAsset string) (string, error) {
 	parsedUrl, err := url.Parse(coinPriceEndpoint)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to parse price url")
+	}
+
+	// Changing platform ids to get MATIC price in $
+	if platform == polygonId {
+		platform = nativeMaticId
 	}
 
 	q := parsedUrl.Query()
