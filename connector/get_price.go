@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	priceEndpoint = "/integrations/pricer/price"
+	priceEndpoint = "pricer/price"
 )
 
 func (c *Connector) GetPrice(platform, contract string) (models.PriceResponse, error) {

@@ -38,7 +38,7 @@ func (c *pricer) PricerConnector() *Connector {
 		err := figure.
 			Out(&config).
 			With(figure.BaseHooks).
-			From(kv.MustGetStringMap(c.getter, "pricer")).
+			From(kv.MustGetStringMap(c.getter, "connector")).
 			Please()
 		if err != nil {
 			panic(errors.Wrap(err, "failed to figure out pricer"))
