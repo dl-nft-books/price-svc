@@ -15,15 +15,19 @@ type Config interface {
 	comfig.Listenerer
 
 	Coingecko() *coingecko.Service
+	EtherClient() EtherClient
+	Mocked() MockedStructures
 }
 
 type config struct {
 	comfig.Logger
 	types.Copuser
 	comfig.Listenerer
-	getter kv.Getter
 
-	coingecko comfig.Once
+	getter           kv.Getter
+	ethererOnce      comfig.Once
+	coingecko        comfig.Once
+	mockedTokensOnce comfig.Once
 }
 
 func New(getter kv.Getter) Config {

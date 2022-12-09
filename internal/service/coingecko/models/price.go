@@ -13,7 +13,10 @@ func (p PriceResponse) GetPrice(contract, vs string) string {
 		return ""
 	}
 
-	price := data[strings.ToLower(vs)]
+	price, ok := data[strings.ToLower(vs)]
+	if !ok {
+		return ""
+	}
 
 	return fmt.Sprintf("%f", price)
 }

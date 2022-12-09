@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"gitlab.com/tokend/nft-books/price-svc/internal/service/eth_reader"
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
@@ -17,6 +18,8 @@ const (
 	coingeckoCtxKey
 	platformsCtxKey
 	pricesCtxKey
+	ethReaderCtxKey
+	mockedTokensCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -37,6 +40,26 @@ func CtxCoingecko(entry *coingecko.Service) func(context.Context) context.Contex
 
 func Coingecko(r *http.Request) *coingecko.Service {
 	return r.Context().Value(coingeckoCtxKey).(*coingecko.Service)
+}
+
+func CtxEthReader(reader *eth_reader.EthReader) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, ethReaderCtxKey, reader)
+	}
+}
+
+func EthReader(r *http.Request) *eth_reader.EthReader {
+	return r.Context().Value(ethReaderCtxKey).(*eth_reader.EthReader)
+}
+
+func CtxMockedTokens(mockedTokens map[string]string) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, mockedTokensCtxKey, mockedTokens)
+	}
+}
+
+func MockedTokens(r *http.Request) map[string]string {
+	return r.Context().Value(mockedTokensCtxKey).(map[string]string)
 }
 
 func CtxPlatforms(entry *models.Platforms) func(context.Context) context.Context {

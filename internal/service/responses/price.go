@@ -1,8 +1,11 @@
 package responses
 
-import "gitlab.com/tokend/nft-books/price-svc/resources"
+import (
+	"gitlab.com/tokend/nft-books/price-svc/internal/data"
+	"gitlab.com/tokend/nft-books/price-svc/resources"
+)
 
-func GetPriceResponse(price, contract string) resources.PriceResponse {
+func GetPriceResponse(price string, contract string, erc20Data data.Erc20Data) resources.PriceResponse {
 	return resources.PriceResponse{
 		Data: resources.Price{
 			Key: resources.Key{
@@ -11,6 +14,7 @@ func GetPriceResponse(price, contract string) resources.PriceResponse {
 			},
 			Attributes: resources.PriceAttributes{
 				Price: price,
+				Token: erc20Data.Resource(),
 			},
 		},
 	}

@@ -8,7 +8,14 @@ allOf:
         type: object
         required:
           - price
+          - token
         properties:
           price:
             type: string
             example: "0.005"
+          token:
+            allOf:
+              - $ref: '#/components/schemas/Token'
+              - type: object
+            description: Token metadata information
+
