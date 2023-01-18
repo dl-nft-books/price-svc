@@ -63,9 +63,6 @@ func (s *service) getCoigeckoPlatforms() (*models.Platforms, error) {
 	for _, platform := range platforms {
 		mapped[platform.Name] = platform.ID
 		chainIdentifier := int32(platform.ChainIdentifier)
-		if s.mocked.ChainId != nil {
-			chainIdentifier = int32(*s.mocked.ChainId)
-		}
 
 		platformsResp.Data = append(platformsResp.Data, resources.Platform{
 			Key: resources.Key{

@@ -17,19 +17,16 @@ type MockedToken struct {
 }
 
 type MockedStructures struct {
-	Tokens  map[string]string
-	ChainId *int64
+	Tokens map[string]string
 }
 
 func (c *config) Mocked() MockedStructures {
 	return c.mockedTokensOnce.Do(func() interface{} {
 		cfg := struct {
 			MockedTokens []MockedToken `fig:"tokens"`
-			ChainId      *int64        `fig:"chain_id"`
 		}{}
 		result := MockedStructures{
-			Tokens:  make(map[string]string),
-			ChainId: nil,
+			Tokens: make(map[string]string),
 		}
 
 		if err := figure.
@@ -43,8 +40,6 @@ func (c *config) Mocked() MockedStructures {
 		for _, mockedToken := range cfg.MockedTokens {
 			result.Tokens[mockedToken.ActualAddress] = mockedToken.CoingeckoAddress
 		}
-		result.ChainId = cfg.ChainId
-
 		return result
 	}).(MockedStructures)
 }
