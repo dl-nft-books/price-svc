@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"gitlab.com/tokend/nft-books/price-svc/internal/data"
 	"net/http"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -14,6 +15,16 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 	request, err := requests.NewGetPriceRequest(r)
 	if err != nil {
 		ape.RenderErr(w, problems.BadRequest(err)...)
+		return
+	}
+
+	//hardcode Q because Q has no price
+	if request.Platform == "q" {
+		ape.Render(w, responses.GetPriceResponse("1", "", data.Erc20Data{
+			Symbol:   "Q",
+			Name:     "Q",
+			Decimals: 18,
+		}))
 		return
 	}
 
