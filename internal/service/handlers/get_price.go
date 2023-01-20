@@ -20,7 +20,7 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 
 	//hardcode Q because Q has no price
 	if request.Platform == "q" {
-		ape.Render(w, responses.GetPriceResponse("1", "q", data.Erc20Data{
+		ape.Render(w, responses.GetPriceResponse("1.0", "q", data.Erc20Data{
 			Symbol:   "Q",
 			Name:     "Q",
 			Decimals: 18,
