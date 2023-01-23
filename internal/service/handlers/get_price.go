@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"github.com/pkg/errors"
 	"gitlab.com/tokend/nft-books/price-svc/internal/data"
+	"gitlab.com/tokend/nft-books/price-svc/internal/service/eth_reader"
 	"net/http"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -49,7 +51,11 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		key = request.Platform
 	}
 
-	erc20Data, err := EthReader(r).GetErc20Data(common.HexToAddress(request.Contract))
+	networker, err := Networker(r).GetNetworkDetailedByChainID(request.ChainId)
+	if err != nil {
+		Log(r).Error(errors.Wrap(err, "failed to select network from the database"))
+	}
+	erc20Data, err := eth_reader.NewEthReader(networker.RpcUrl).GetErc20Data(common.HexToAddress(request.Contract))
 	if err != nil {
 		ape.RenderErr(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get erc20 from the contract")

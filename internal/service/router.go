@@ -3,8 +3,6 @@ package service
 import (
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/eth_reader"
-
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/handlers"
 )
 
@@ -23,8 +21,10 @@ func (s *service) router() chi.Router {
 			handlers.CtxLog(s.log),
 			handlers.CtxCoingecko(s.coingecko),
 			handlers.CtxPlatforms(platforms),
-			handlers.CtxEthReader(eth_reader.NewEthReader(s.rpc)),
 			handlers.CtxMockedTokens(s.mocked.Tokens),
+
+			// Connectors
+			handlers.CtxNetworker(s.networker),
 		),
 	)
 

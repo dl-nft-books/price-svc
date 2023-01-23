@@ -1,10 +1,10 @@
 package service
 
 import (
+	networker "gitlab.com/tokend/nft-books/network-svc/connector"
 	"net"
 	"net/http"
 
-	"github.com/ethereum/go-ethereum/ethclient"
 	"gitlab.com/distributed_lab/kit/copus/types"
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
@@ -20,8 +20,8 @@ type service struct {
 	copus     types.Copus
 	listener  net.Listener
 	coingecko *coingecko.Service
-	rpc       *ethclient.Client
 	mocked    config.MockedStructures
+	networker *networker.Connector
 }
 
 func (s *service) run() error {
@@ -41,8 +41,8 @@ func newService(cfg config.Config) *service {
 		copus:     cfg.Copus(),
 		listener:  cfg.Listener(),
 		coingecko: cfg.Coingecko(),
-		rpc:       cfg.EtherClient().Rpc,
 		mocked:    cfg.Mocked(),
+		networker: cfg.NetworkConnector(),
 	}
 }
 
