@@ -41,6 +41,5 @@ func (c *Connector) Get(endpoint *url.URL, dst interface{}) (err error) {
 	if response == nil || dst == nil {
 		return nil
 	}
-
 	return json.Unmarshal(response, dst)
 }

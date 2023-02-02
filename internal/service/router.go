@@ -31,6 +31,7 @@ func (s *service) router() chi.Router {
 	r.Route("/integrations/pricer", func(r chi.Router) {
 		r.Get("/platforms", handlers.GetPlatforms)
 		r.Get("/price", handlers.GetPrice)
+		r.Get("/nft", handlers.GetNftPrice)
 	})
 
 	return r

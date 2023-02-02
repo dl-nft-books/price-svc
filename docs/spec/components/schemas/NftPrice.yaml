@@ -1,0 +1,17 @@
+allOf:
+  - $ref: "#/components/schemas/NftPriceKey"
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - native_currency
+          - usd
+        properties:
+          native_currency:
+            type: float
+            example: 0.005
+          usd:
+            type: float
