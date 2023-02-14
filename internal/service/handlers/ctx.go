@@ -17,9 +17,9 @@ const (
 	logCtxKey ctxKey = iota
 	coingeckoCtxKey
 	platformsCtxKey
-	ethReaderCtxKey
 	networkerCtxKey
 	mockedTokensCtxKey
+	mockedNftsCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -60,6 +60,16 @@ func CtxMockedTokens(mockedTokens map[string]string) func(context.Context) conte
 
 func MockedTokens(r *http.Request) map[string]string {
 	return r.Context().Value(mockedTokensCtxKey).(map[string]string)
+}
+
+func CtxMockedNfts(mockedNfts map[string]string) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, mockedNftsCtxKey, mockedNfts)
+	}
+}
+
+func MockedNfts(r *http.Request) map[string]string {
+	return r.Context().Value(mockedNftsCtxKey).(map[string]string)
 }
 
 func CtxPlatforms(entry *models.Platforms) func(context.Context) context.Context {
