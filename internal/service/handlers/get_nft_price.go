@@ -26,7 +26,7 @@ func GetNftPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if price == nil {
+	if price.Usd == 0 {
 		ape.RenderErr(w, problems.NotFound())
 		return
 	}
