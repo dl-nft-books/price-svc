@@ -31,14 +31,16 @@ func GetNftPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := resources.NftPrice{
-		Key: resources.Key{
-			ID:   request.Contract,
-			Type: resources.NFT_PRICE,
-		},
-		Attributes: resources.NftPriceAttributes{
-			NativeCurrency: price.NativeCurrency,
-			Usd:            price.Usd,
+	response := resources.NftPriceResponse{
+		Data: resources.NftPrice{
+			Key: resources.Key{
+				ID:   request.Contract,
+				Type: resources.NFT_PRICE,
+			},
+			Attributes: resources.NftPriceAttributes{
+				NativeCurrency: price.NativeCurrency,
+				Usd:            price.Usd,
+			},
 		},
 	}
 	ape.Render(w, response)
