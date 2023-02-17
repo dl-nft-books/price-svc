@@ -22,6 +22,7 @@ func (s *service) router() chi.Router {
 			handlers.CtxCoingecko(s.coingecko),
 			handlers.CtxPlatforms(platforms),
 			handlers.CtxMockedTokens(s.mocked.Tokens),
+			handlers.CtxMockedPlatforms(s.mocked.Platforms),
 
 			// Connectors
 			handlers.CtxNetworker(s.networker),
