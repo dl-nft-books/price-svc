@@ -32,3 +32,9 @@ mocked:
   nfts:
     - actual_address: 0xEe84b9D1F5320bC498d39C38Dd90242CE9E8fa34
       coingecko_address: 0x6609e542e0626bc3fc2110f0ead172030fbe97ab # ethereum platform
+  platforms:
+    - id: "q"
+      chain_id: 35441
+      name: "Q"
+      short_name: "Q"
+      price_per_one_token: "1.0" # string in USD

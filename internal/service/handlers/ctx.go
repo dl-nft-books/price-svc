@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	networker "gitlab.com/tokend/nft-books/network-svc/connector"
+	"gitlab.com/tokend/nft-books/price-svc/internal/config"
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
@@ -20,6 +21,7 @@ const (
 	networkerCtxKey
 	mockedTokensCtxKey
 	mockedNftsCtxKey
+	mockedPlatformsCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -70,6 +72,16 @@ func CtxMockedNfts(mockedNfts map[string]string) func(context.Context) context.C
 
 func MockedNfts(r *http.Request) map[string]string {
 	return r.Context().Value(mockedNftsCtxKey).(map[string]string)
+}
+
+func CtxMockedPlatforms(mockedPlatforms map[string]config.MockedPlatform) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, mockedPlatformsCtxKey, mockedPlatforms)
+	}
+}
+
+func MockedPlatforms(r *http.Request) map[string]config.MockedPlatform {
+	return r.Context().Value(mockedPlatformsCtxKey).(map[string]config.MockedPlatform)
 }
 
 func CtxPlatforms(entry *models.Platforms) func(context.Context) context.Context {

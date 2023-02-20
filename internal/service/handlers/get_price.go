@@ -3,10 +3,8 @@ package handlers
 import (
 	"github.com/pkg/errors"
 	"gitlab.com/tokend/nft-books/price-svc/internal/data"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/eth_reader"
 	"net/http"
 
-	"github.com/ethereum/go-ethereum/common"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/requests"
@@ -20,22 +18,12 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//hardcode Q because Q has no price
-	if request.Platform == "q" {
-		ape.Render(w, responses.GetPriceResponse("1.0", "q", data.Erc20Data{
-			Symbol:   "Q",
-			Name:     "Q",
-			Decimals: 18,
-		}))
-		return
-	}
-
 	coingeckoContract := request.Contract
 	if mockedToken, ok := MockedTokens(r)[request.Contract]; ok {
 		coingeckoContract = mockedToken
 	}
 
-	price, err := Coingecko(r).GetPrice(request.Platform, coingeckoContract, "usd")
+	price, err := getPrice(r, request.Platform, coingeckoContract)
 	if err != nil {
 		ape.Render(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get price")
@@ -55,12 +43,15 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		Log(r).Error(errors.Wrap(err, "failed to select network from the database"))
 	}
-	erc20Data, err := eth_reader.NewEthReader(networker.RpcUrl).GetErc20Data(common.HexToAddress(request.Contract))
-	if err != nil {
-		ape.RenderErr(w, problems.InternalError())
-		Log(r).WithError(err).Error("failed to get erc20 from the contract")
-		return
+	ape.Render(w, responses.GetPriceResponse(price, key, data.Erc20Data{
+		Name:     networker.TokenName,
+		Symbol:   networker.TokenSymbol,
+		Decimals: int32(networker.Decimals),
+	}))
+}
+func getPrice(r *http.Request, platform, contract string) (string, error) {
+	if mockedPlatforms, ok := MockedPlatforms(r)[platform]; ok {
+		return mockedPlatforms.PricePerOneToken, nil
 	}
-
-	ape.Render(w, responses.GetPriceResponse(price, key, *erc20Data))
+	return Coingecko(r).GetPrice(platform, contract, "usd")
 }

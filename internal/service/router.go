@@ -23,6 +23,7 @@ func (s *service) router() chi.Router {
 			handlers.CtxPlatforms(platforms),
 			handlers.CtxMockedTokens(s.mocked.Tokens),
 			handlers.CtxMockedNfts(s.mocked.Nfts),
+			handlers.CtxMockedPlatforms(s.mocked.Platforms),
 
 			// Connectors
 			handlers.CtxNetworker(s.networker),

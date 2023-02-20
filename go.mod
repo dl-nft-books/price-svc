@@ -16,7 +16,7 @@ require (
 	gitlab.com/distributed_lab/logan v3.8.1+incompatible
 	gitlab.com/distributed_lab/urlval v3.0.0+incompatible
 	gitlab.com/tokend/connectors v0.1.9
-	gitlab.com/tokend/nft-books/network-svc v0.0.0-20230118121524-ca8cac7ce044
+	gitlab.com/tokend/nft-books/network-svc v0.0.0-20230217142254-744cf12bb536
 )
 
 require (
