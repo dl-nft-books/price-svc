@@ -21,24 +21,25 @@ type MockedPlatform struct {
 	Name             string `fig:"name,required"`
 	ShortName        string `fig:"short_name,required"`
 	PricePerOneToken string `fig:"price_per_one_token,required"`
+	PricePerOneNft   string `fig:"price_per_one_nft,required"`
 }
 
 type MockedStructures struct {
-	Tokens map[string]string
-	Nfts   map[string]string
+	Tokens    map[string]string
+	Nfts      map[string]string
 	Platforms map[string]MockedPlatform
 }
 
 func (c *config) Mocked() MockedStructures {
 	return c.mockedTokensOnce.Do(func() interface{} {
 		cfg := struct {
-			MockedTokens []MockedToken `fig:"tokens"`
-			MockedNfts   []MockedToken `fig:"nfts"`
+			MockedTokens    []MockedToken    `fig:"tokens"`
+			MockedNfts      []MockedToken    `fig:"nfts"`
 			MockedPlatforms []MockedPlatform `fig:"platforms"`
 		}{}
 		result := MockedStructures{
-			Tokens: make(map[string]string),
-			Nfts:   make(map[string]string),
+			Tokens:    make(map[string]string),
+			Nfts:      make(map[string]string),
 			Platforms: make(map[string]MockedPlatform),
 		}
 

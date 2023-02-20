@@ -38,3 +38,4 @@ mocked:
       name: "Q"
       short_name: "Q"
       price_per_one_token: "1.0" # string in USD
+      price_per_one_nft: "1.0" # string in USD
