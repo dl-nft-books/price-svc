@@ -4,6 +4,7 @@ import (
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/handlers"
+	"gitlab.com/tokend/nft-books/price-svc/resources"
 )
 
 func (s *service) router() chi.Router {
@@ -14,6 +15,20 @@ func (s *service) router() chi.Router {
 		panic(err)
 	}
 
+	//hardcode Q because Q has no price
+	for _, mockedPlatform := range s.mocked.Platforms {
+		platforms.Response.Data = append(platforms.Response.Data, resources.Platform{
+			Key: resources.Key{
+				ID:   mockedPlatform.Id,
+				Type: resources.PLATFORMS,
+			},
+			Attributes: resources.PlatformAttributes{
+				ChainIdentifier: mockedPlatform.ChainId,
+				Name:            mockedPlatform.Name,
+				Shortname:       mockedPlatform.ShortName,
+			},
+		})
+	}
 	r.Use(
 		ape.RecoverMiddleware(s.log),
 		ape.LoganMiddleware(s.log),
