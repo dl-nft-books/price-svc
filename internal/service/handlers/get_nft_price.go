@@ -23,7 +23,7 @@ func GetNftPrice(w http.ResponseWriter, r *http.Request) {
 	}
 	price, err := getNftPrice(r, request.Platform, coingeckoContract)
 	if err != nil {
-		ape.Render(w, problems.InternalError())
+		ape.RenderErr(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get price")
 		return
 	}

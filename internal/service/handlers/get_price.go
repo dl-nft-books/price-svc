@@ -25,7 +25,7 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 
 	price, err := getPrice(r, request.Platform, coingeckoContract)
 	if err != nil {
-		ape.Render(w, problems.InternalError())
+		ape.RenderErr(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get price")
 		return
 	}
@@ -42,6 +42,8 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 	networker, err := Networker(r).GetNetworkDetailedByChainID(request.ChainId)
 	if err != nil {
 		Log(r).Error(errors.Wrap(err, "failed to select network from the database"))
+		ape.RenderErr(w, problems.InternalError())
+		return
 	}
 	ape.Render(w, responses.GetPriceResponse(price, key, data.Erc20Data{
 		Name:     networker.TokenName,

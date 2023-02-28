@@ -467,8 +467,8 @@ gitlab.com/tokend/go v3.15.0+incompatible h1:+FLJP11ppj5ttU3KNcvvummU3uE6hpju1CY
 gitlab.com/tokend/go v3.15.0+incompatible/go.mod h1:qz38YBc7VL29H2gnXbpRzcEVw2d1NUZ5SVDzIehqDCA=
 gitlab.com/tokend/keypair v0.0.0-20190412110653-b9d7e0c8b312 h1:u8pxrNw8QKIsrmClG71uuTPy22fkePAXBkHgxrXkMU8=
 gitlab.com/tokend/keypair v0.0.0-20190412110653-b9d7e0c8b312/go.mod h1:vdlhN5/oQR7uY8EsGSqPf8bwnmQxxpaq7qrQn5Y3U/w=
-gitlab.com/tokend/nft-books/network-svc v0.0.0-20230217142254-744cf12bb536 h1:ARPiUbHO1EgjWu5OZlq+Yn3UAFKTqJPNc82gCU+C/TA=
-gitlab.com/tokend/nft-books/network-svc v0.0.0-20230217142254-744cf12bb536/go.mod h1:qSawvsusldNL6fGpkycUbbqXa7RiGUqMoHt4THxMvMc=
+gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392 h1:0BiYHsv+MI6xo1atYJ4S9+rgxVi6x3nkZJrCvjciMlQ=
+gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392/go.mod h1:qSawvsusldNL6fGpkycUbbqXa7RiGUqMoHt4THxMvMc=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
 go.etcd.io/etcd/client/pkg/v3 v3.5.0/go.mod h1:IJHfcCEKxYu1Os13ZdwCwIUTUVGYTSAM3YSwc9/Ac1g=
 go.etcd.io/etcd/client/v2 v2.305.0/go.mod h1:h9puh54ZTgAKtEbut2oe9P4L/oqKCVB6xsXlzd7alYQ=

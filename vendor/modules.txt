@@ -210,7 +210,7 @@ gitlab.com/tokend/keypair/figurekeypair
 gitlab.com/tokend/keypair/internal
 gitlab.com/tokend/keypair/internal/crc16
 gitlab.com/tokend/keypair/internal/strkey
-# gitlab.com/tokend/nft-books/network-svc v0.0.0-20230217142254-744cf12bb536
+# gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392
 ## explicit; go 1.18
 gitlab.com/tokend/nft-books/network-svc/connector
 gitlab.com/tokend/nft-books/network-svc/connector/models

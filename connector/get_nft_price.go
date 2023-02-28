@@ -16,7 +16,7 @@ func (c *Connector) GetNftPrice(platform, contract string) (models.NftPriceRespo
 
 	parsedUrl, err := url.Parse(nftPriceEndpoint)
 	if err != nil {
-		return response, errors.Wrap(err, "failed to parse price url")
+		return response, errors.Wrap(err, "failed to parse nft price url")
 	}
 
 	query := parsedUrl.Query()
@@ -26,7 +26,7 @@ func (c *Connector) GetNftPrice(platform, contract string) (models.NftPriceRespo
 
 	err = c.Get(parsedUrl, &response)
 	if err != nil {
-		return response, errors.Wrap(err, "failed to get price")
+		return response, errors.Wrap(err, "failed to get nft price")
 	}
 
 	return response, nil
