@@ -5,6 +5,7 @@
 package resources
 
 type PriceAttributes struct {
+	// price in $
 	Price string `json:"price"`
 	// Token metadata information
 	Token Token `json:"token"`

@@ -5,7 +5,10 @@
 package resources
 
 type PlatformAttributes struct {
-	ChainIdentifier int32  `json:"chain_identifier"`
-	Name            string `json:"name"`
-	Shortname       string `json:"shortname"`
+	// network chain id
+	ChainIdentifier int32 `json:"chain_identifier"`
+	// platform name
+	Name string `json:"name"`
+	// platform shortname
+	Shortname string `json:"shortname"`
 }

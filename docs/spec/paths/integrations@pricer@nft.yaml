@@ -5,7 +5,7 @@ get:
       required: false
       schema:
         type: string
-      description: token contract
+      description: nft collection
       example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
     - name: 'platform'
       in: query
@@ -13,18 +13,10 @@ get:
       schema:
         type: string
       example: 'ethereum'
-    - name: 'chain_id'
-      in: query
-      required: true
-      schema:
-        type: integer
-      description: network chain id
-      example: 137
   tags:
-      - Price
-  summary: Get price
-  description: If contract address is not specified, native token will be used.
-  operationId: getPrice
+      - NftPrice
+  summary: Get NFT floor price
+  operationId: getNftPrice
   responses:
     '200':
       description: Success
@@ -37,7 +29,7 @@ get:
             properties:
               data:
                 type: object
-                $ref: '#/components/schemas/Price'
+                $ref: '#/components/schemas/NftPrice'
     '400':
       description: Bad request error
     '500':

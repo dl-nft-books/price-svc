@@ -5,6 +5,8 @@
 package resources
 
 type NftPriceAttributes struct {
+	// price of NFT in native currency
 	NativeCurrency float32 `json:"native_currency"`
-	Usd            float32 `json:"usd"`
+	// price of NFT in $
+	Usd float32 `json:"usd"`
 }
