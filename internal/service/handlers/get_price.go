@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"github.com/pkg/errors"
+	"gitlab.com/tokend/nft-books/price-svc/internal/data"
 	"net/http"
 
-	"github.com/ethereum/go-ethereum/common"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
 	"gitlab.com/tokend/nft-books/price-svc/internal/service/requests"
@@ -22,9 +23,9 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		coingeckoContract = mockedToken
 	}
 
-	price, err := Coingecko(r).GetPrice(request.Platform, coingeckoContract, "usd")
+	price, err := getPrice(r, request.Platform, coingeckoContract)
 	if err != nil {
-		ape.Render(w, problems.InternalError())
+		ape.RenderErr(w, problems.InternalError())
 		Log(r).WithError(err).Error("failed to get price")
 		return
 	}
@@ -38,12 +39,21 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		key = request.Platform
 	}
 
-	erc20Data, err := EthReader(r).GetErc20Data(common.HexToAddress(request.Contract))
+	networker, err := Networker(r).GetNetworkDetailedByChainID(request.ChainId)
 	if err != nil {
+		Log(r).Error(errors.Wrap(err, "failed to select network from the database"))
 		ape.RenderErr(w, problems.InternalError())
-		Log(r).WithError(err).Error("failed to get erc20 from the contract")
 		return
 	}
-
-	ape.Render(w, responses.GetPriceResponse(price, key, *erc20Data))
+	ape.Render(w, responses.GetPriceResponse(price, key, data.Erc20Data{
+		Name:     networker.TokenName,
+		Symbol:   networker.TokenSymbol,
+		Decimals: int32(networker.Decimals),
+	}))
+}
+func getPrice(r *http.Request, platform, contract string) (string, error) {
+	if mockedPlatforms, ok := MockedPlatforms(r)[platform]; ok {
+		return mockedPlatforms.PricePerOneToken, nil
+	}
+	return Coingecko(r).GetPrice(platform, contract, "usd")
 }

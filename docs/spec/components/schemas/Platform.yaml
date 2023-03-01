@@ -13,10 +13,13 @@ allOf:
         properties:
           chain_identifier:
             type: integer
+            description: network chain id
             example: 10
           name:
             type: string
+            description: platform name
             example: Optimistic Ethereum
           shortname:
             type: string
+            description: platform shortname
             example: Optimistic Ethereum

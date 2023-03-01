@@ -67,7 +67,6 @@ func (s *Service) getPriceContract(platform, contract, vsAsset string) (string, 
 	q.Set("vs_currencies", vsAsset)
 
 	parsedUrl.RawQuery = q.Encode()
-
 	err = s.connector.Get(parsedUrl, &response)
 	if err != nil {
 		if cerr, ok := err.(cerrors.Error); ok && cerr.Status() == http.StatusNotFound {

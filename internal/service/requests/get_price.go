@@ -10,6 +10,7 @@ import (
 type GetPriceRequest struct {
 	Platform string `url:"platform"`
 	Contract string `url:"contract"`
+	ChainId  int64  `url:"chain_id"`
 }
 
 func NewGetPriceRequest(r *http.Request) (GetPriceRequest, error) {

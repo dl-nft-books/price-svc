@@ -2,7 +2,8 @@ package handlers
 
 import (
 	"context"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/eth_reader"
+	networker "gitlab.com/tokend/nft-books/network-svc/connector"
+	"gitlab.com/tokend/nft-books/price-svc/internal/config"
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
@@ -17,9 +18,10 @@ const (
 	logCtxKey ctxKey = iota
 	coingeckoCtxKey
 	platformsCtxKey
-	pricesCtxKey
-	ethReaderCtxKey
+	networkerCtxKey
 	mockedTokensCtxKey
+	mockedNftsCtxKey
+	mockedPlatformsCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -42,14 +44,14 @@ func Coingecko(r *http.Request) *coingecko.Service {
 	return r.Context().Value(coingeckoCtxKey).(*coingecko.Service)
 }
 
-func CtxEthReader(reader *eth_reader.EthReader) func(context.Context) context.Context {
+func CtxNetworker(entry *networker.Connector) func(context.Context) context.Context {
 	return func(ctx context.Context) context.Context {
-		return context.WithValue(ctx, ethReaderCtxKey, reader)
+		return context.WithValue(ctx, networkerCtxKey, entry)
 	}
 }
 
-func EthReader(r *http.Request) *eth_reader.EthReader {
-	return r.Context().Value(ethReaderCtxKey).(*eth_reader.EthReader)
+func Networker(r *http.Request) *networker.Connector {
+	return r.Context().Value(networkerCtxKey).(*networker.Connector)
 }
 
 func CtxMockedTokens(mockedTokens map[string]string) func(context.Context) context.Context {
@@ -60,6 +62,26 @@ func CtxMockedTokens(mockedTokens map[string]string) func(context.Context) conte
 
 func MockedTokens(r *http.Request) map[string]string {
 	return r.Context().Value(mockedTokensCtxKey).(map[string]string)
+}
+
+func CtxMockedNfts(mockedNfts map[string]string) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, mockedNftsCtxKey, mockedNfts)
+	}
+}
+
+func MockedNfts(r *http.Request) map[string]string {
+	return r.Context().Value(mockedNftsCtxKey).(map[string]string)
+}
+
+func CtxMockedPlatforms(mockedPlatforms map[string]config.MockedPlatform) func(context.Context) context.Context {
+	return func(ctx context.Context) context.Context {
+		return context.WithValue(ctx, mockedPlatformsCtxKey, mockedPlatforms)
+	}
+}
+
+func MockedPlatforms(r *http.Request) map[string]config.MockedPlatform {
+	return r.Context().Value(mockedPlatformsCtxKey).(map[string]config.MockedPlatform)
 }
 
 func CtxPlatforms(entry *models.Platforms) func(context.Context) context.Context {

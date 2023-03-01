@@ -12,6 +12,7 @@ allOf:
         properties:
           price:
             type: string
+            description: price in $
             example: "0.005"
           token:
             allOf:
