@@ -21,8 +21,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - First relatively stable version of a pricer service that returns a token price using coingecko API.    
 
-[1.1.0]: https://gitlab.com/tokend/nft-books/generator-svc/compare/1.0.0...1.1.0
-[1.0.0]: https://gitlab.com/tokend/nft-books/generator-svc/compare/1.0.0-rc.0...1.0.0
-[1.0.0-rc.0]: https://gitlab.com/tokend/nft-books/generator-svc/tags/1.0.0-rc.0
+[1.1.0]: https://gitlab.com/tokend/nft-books/price-svc/compare/1.0.0...1.1.0
+[1.0.0]: https://gitlab.com/tokend/nft-books/price-svc/compare/1.0.0-rc.0...1.0.0
+[1.0.0-rc.0]: https://gitlab.com/tokend/nft-books/price-svc/tags/1.0.0-rc.0
 
 
