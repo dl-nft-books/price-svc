@@ -1,7 +1,7 @@
 # price-svc
 
 ## Description
-Service for getting token's price using _coingecko_ API
+Service for getting token's price and nft collections floor price using _coingecko_ API
 
 ## Install
 
