@@ -2,8 +2,8 @@ package connector
 
 import (
 	"fmt"
-	"gitlab.com/tokend/nft-books/network-svc/connector/models"
-	"gitlab.com/tokend/nft-books/network-svc/resources"
+	"github.com/dl-nft-books/network-svc/connector/models"
+	"github.com/dl-nft-books/network-svc/resources"
 )
 
 const (

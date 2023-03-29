@@ -3,7 +3,7 @@ package coingecko
 import (
 	"time"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/helpers"
+	"github.com/dl-nft-books/price-svc/internal/service/helpers"
 )
 
 type Service struct {

@@ -1,9 +1,10 @@
-module gitlab.com/tokend/nft-books/price-svc
+module github.com/dl-nft-books/price-svc
 
 go 1.18
 
 require (
 	github.com/alecthomas/kingpin v2.2.6+incompatible
+	github.com/dl-nft-books/network-svc v0.0.0-20230329160452-99950496eafe
 	github.com/ethereum/go-ethereum v1.10.26
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
@@ -16,7 +17,6 @@ require (
 	gitlab.com/distributed_lab/logan v3.8.1+incompatible
 	gitlab.com/distributed_lab/urlval v3.0.0+incompatible
 	gitlab.com/tokend/connectors v0.1.9
-	gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392
 )
 
 require (

@@ -25,6 +25,11 @@ github.com/deckarep/golang-set
 ## explicit; go 1.16
 github.com/decred/dcrd/dcrec/secp256k1/v4
 github.com/decred/dcrd/dcrec/secp256k1/v4/ecdsa
+# github.com/dl-nft-books/network-svc v0.0.0-20230329160452-99950496eafe
+## explicit; go 1.18
+github.com/dl-nft-books/network-svc/connector
+github.com/dl-nft-books/network-svc/connector/models
+github.com/dl-nft-books/network-svc/resources
 # github.com/ethereum/go-ethereum v1.10.26
 ## explicit; go 1.17
 github.com/ethereum/go-ethereum
@@ -210,11 +215,6 @@ gitlab.com/tokend/keypair/figurekeypair
 gitlab.com/tokend/keypair/internal
 gitlab.com/tokend/keypair/internal/crc16
 gitlab.com/tokend/keypair/internal/strkey
-# gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392
-## explicit; go 1.18
-gitlab.com/tokend/nft-books/network-svc/connector
-gitlab.com/tokend/nft-books/network-svc/connector/models
-gitlab.com/tokend/nft-books/network-svc/resources
 # golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 ## explicit; go 1.17
 golang.org/x/crypto/ed25519

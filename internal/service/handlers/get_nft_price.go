@@ -1,14 +1,14 @@
 package handlers
 
 import (
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
-	"gitlab.com/tokend/nft-books/price-svc/resources"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/resources"
 	"net/http"
 	"strconv"
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/requests"
+	"github.com/dl-nft-books/price-svc/internal/service/requests"
 )
 
 func GetNftPrice(w http.ResponseWriter, r *http.Request) {

@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/ethereum/go-ethereum/ethclient"
-	"gitlab.com/tokend/nft-books/network-svc/resources"
+	"github.com/dl-nft-books/network-svc/resources"
 )
 
 type NetworkDetailedResponse struct {

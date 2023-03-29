@@ -3,7 +3,7 @@ package coingecko
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
 	"net/url"
 )
 

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
 
 	"github.com/pkg/errors"
 	"gitlab.com/distributed_lab/json-api-connector/cerrors"

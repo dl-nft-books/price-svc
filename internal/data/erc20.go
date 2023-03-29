@@ -1,7 +1,7 @@
 package data
 
 import (
-	"gitlab.com/tokend/nft-books/price-svc/resources"
+	"github.com/dl-nft-books/price-svc/resources"
 )
 
 type Erc20Data struct {

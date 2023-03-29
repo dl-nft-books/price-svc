@@ -3,8 +3,8 @@ package service
 import (
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/handlers"
-	"gitlab.com/tokend/nft-books/price-svc/resources"
+	"github.com/dl-nft-books/price-svc/internal/service/handlers"
+	"github.com/dl-nft-books/price-svc/resources"
 )
 
 func (s *service) router() chi.Router {

@@ -2,13 +2,13 @@ package handlers
 
 import (
 	"github.com/pkg/errors"
-	"gitlab.com/tokend/nft-books/price-svc/internal/data"
+	"github.com/dl-nft-books/price-svc/internal/data"
 	"net/http"
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/requests"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/responses"
+	"github.com/dl-nft-books/price-svc/internal/service/requests"
+	"github.com/dl-nft-books/price-svc/internal/service/responses"
 )
 
 func GetPrice(w http.ResponseWriter, r *http.Request) {

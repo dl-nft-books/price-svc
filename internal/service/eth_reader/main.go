@@ -5,8 +5,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"gitlab.com/distributed_lab/logan/v3/errors"
-	"gitlab.com/tokend/nft-books/price-svc/internal/data"
-	"gitlab.com/tokend/nft-books/price-svc/solidity/generated/erc20"
+	"github.com/dl-nft-books/price-svc/internal/data"
+	"github.com/dl-nft-books/price-svc/solidity/generated/erc20"
 )
 
 var (

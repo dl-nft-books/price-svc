@@ -8,8 +8,8 @@ import (
 	"gitlab.com/distributed_lab/figure"
 	"gitlab.com/distributed_lab/kit/kv"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/helpers"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
+	"github.com/dl-nft-books/price-svc/internal/service/helpers"
 )
 
 func (c *config) Coingecko() *coingecko.Service {

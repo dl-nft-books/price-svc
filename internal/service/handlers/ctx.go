@@ -2,14 +2,14 @@ package handlers
 
 import (
 	"context"
-	networker "gitlab.com/tokend/nft-books/network-svc/connector"
-	"gitlab.com/tokend/nft-books/price-svc/internal/config"
+	networker "github.com/dl-nft-books/network-svc/connector"
+	"github.com/dl-nft-books/price-svc/internal/config"
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
 )
 
 type ctxKey int

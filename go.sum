@@ -102,6 +102,8 @@ github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1/go.mod h1:hyedUtir6IdtD/7lIxGeC
 github.com/dgraph-io/badger v1.6.0/go.mod h1:zwt7syl517jmP8s94KqSxTlM6IMsdhYy6psNgSztDR4=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-farm v0.0.0-20190423205320-6a90982ecee2/go.mod h1:SqUrOPUnsFjfmXRMNPybcSiG0BgUW2AuFH8PAnS2iTw=
+github.com/dl-nft-books/network-svc v0.0.0-20230329160452-99950496eafe h1:dcHuGXbKkGsqb9vainB5Tah9O7jlyBur3cylR0FZh1A=
+github.com/dl-nft-books/network-svc v0.0.0-20230329160452-99950496eafe/go.mod h1:s3Vq12eYQ3bRigx4Yvr76334YrHMBOMKFTRW0qjVmfo=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/edsrzf/mmap-go v1.0.0 h1:CEBF7HpRnUCSJgGUb5h1Gm7e3VkmVDrR8lvWVLtrOFw=
 github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385/go.mod h1:0vRUJqYpeSZifjYj7uP3BG/gKcuzL9xWVV/Y+cK33KM=
@@ -467,8 +469,6 @@ gitlab.com/tokend/go v3.15.0+incompatible h1:+FLJP11ppj5ttU3KNcvvummU3uE6hpju1CY
 gitlab.com/tokend/go v3.15.0+incompatible/go.mod h1:qz38YBc7VL29H2gnXbpRzcEVw2d1NUZ5SVDzIehqDCA=
 gitlab.com/tokend/keypair v0.0.0-20190412110653-b9d7e0c8b312 h1:u8pxrNw8QKIsrmClG71uuTPy22fkePAXBkHgxrXkMU8=
 gitlab.com/tokend/keypair v0.0.0-20190412110653-b9d7e0c8b312/go.mod h1:vdlhN5/oQR7uY8EsGSqPf8bwnmQxxpaq7qrQn5Y3U/w=
-gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392 h1:0BiYHsv+MI6xo1atYJ4S9+rgxVi6x3nkZJrCvjciMlQ=
-gitlab.com/tokend/nft-books/network-svc v0.0.0-20230228124725-092327ef3392/go.mod h1:qSawvsusldNL6fGpkycUbbqXa7RiGUqMoHt4THxMvMc=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
 go.etcd.io/etcd/client/pkg/v3 v3.5.0/go.mod h1:IJHfcCEKxYu1Os13ZdwCwIUTUVGYTSAM3YSwc9/Ac1g=
 go.etcd.io/etcd/client/v2 v2.305.0/go.mod h1:h9puh54ZTgAKtEbut2oe9P4L/oqKCVB6xsXlzd7alYQ=

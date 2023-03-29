@@ -6,7 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"gitlab.com/tokend/nft-books/price-svc/connector/models"
+	"github.com/dl-nft-books/price-svc/connector/models"
 )
 
 const (

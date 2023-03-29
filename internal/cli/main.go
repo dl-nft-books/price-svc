@@ -5,8 +5,8 @@ import (
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/config"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service"
+	"github.com/dl-nft-books/price-svc/internal/config"
+	"github.com/dl-nft-books/price-svc/internal/service"
 )
 
 func Run(args []string) bool {

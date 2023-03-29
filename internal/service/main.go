@@ -1,7 +1,7 @@
 package service
 
 import (
-	networker "gitlab.com/tokend/nft-books/network-svc/connector"
+	networker "github.com/dl-nft-books/network-svc/connector"
 	"net"
 	"net/http"
 
@@ -9,10 +9,10 @@ import (
 	"gitlab.com/distributed_lab/logan/v3"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 
-	"gitlab.com/tokend/nft-books/price-svc/internal/config"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko/models"
-	"gitlab.com/tokend/nft-books/price-svc/resources"
+	"github.com/dl-nft-books/price-svc/internal/config"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/resources"
 )
 
 type service struct {

@@ -6,8 +6,8 @@ import (
 	"gitlab.com/distributed_lab/kit/copus/types"
 	"gitlab.com/distributed_lab/kit/kv"
 
-	networker "gitlab.com/tokend/nft-books/network-svc/connector"
-	"gitlab.com/tokend/nft-books/price-svc/internal/service/coingecko"
+	networker "github.com/dl-nft-books/network-svc/connector"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
 )
 
 type Config interface {
