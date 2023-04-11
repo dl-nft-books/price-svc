@@ -2,22 +2,30 @@ configVersion: 1
 project: 'backend'
 ---
 image: builder
-from: golang:1.16.2-stretch
+from: golang:1.18-alpine
 docker:
   WORKDIR: /go/src/gitlab.com/bds/price-svc
 git:
 - add: /
   to: /go/src/gitlab.com/bds/price-svc
   stageDependencies:
+    install:
+    - go.mod
     setup:
     - "**/*"
 shell:
+  install:
+    - apk add git build-base
+    - git config --global url."https://{{  env "CI_JOB_TOKEN" }}@github.com/".insteadOf https://github.com/
+    - go env -w GOPRIVATE=github.com/*
   setup:
-  - export CGO_ENABLED=0
-  - export GO111MODULE=off
-  - export GOOS=linux
-  - go build  -o /usr/local/bin/price-svc  /go/src/gitlab.com/bds/price-svc
-
+    - export CGO_ENABLED=1
+    - export GO111MODULE=on
+    - export GOOS=linux
+    - cd /go/src/gitlab.com/bds/price-svc
+    - go mod tidy
+    - go mod vendor
+    - go build  -o /usr/local/bin/price-svc   /go/src/gitlab.com/bds/price-svc
 ---
 image: service
 from: alpine:3.9
