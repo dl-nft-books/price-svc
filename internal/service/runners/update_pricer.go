@@ -6,7 +6,6 @@ import (
 	"github.com/dl-nft-books/price-svc/internal/config"
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
-	"github.com/dl-nft-books/price-svc/internal/service/handlers"
 	"github.com/dl-nft-books/price-svc/resources"
 	"github.com/pkg/errors"
 	"gitlab.com/distributed_lab/logan/v3"
@@ -63,9 +62,6 @@ func (pc *UpdatePricer) updatePrices(ctx context.Context) error {
 			PricePerOneNft:   platform.PricePerOneNft,
 		})
 	}
-
-	handlers.CtxPlatforms(*pc.setCoigeckoPlatforms(platforms))
-	fmt.Println(platforms)
 	return nil
 }
 

@@ -41,6 +41,7 @@ func Run(args []string) bool {
 	case serviceCmd.FullCommand():
 		service.Run(cfg)
 	case updatePricerCmd.FullCommand():
+		log.Info("started promocode_checker...")
 		updatePricer.RunUpdatePricer(context.Background(), cfg)
 	// handle any custom commands here in the same way
 	default:

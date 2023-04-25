@@ -1,6 +1,6 @@
 log:
   disable_sentry: true
-  level: info
+  level: debug
 
 listener:
   addr: :8005
