@@ -2,13 +2,12 @@ package handlers
 
 import (
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/dl-nft-books/price-svc/internal/service/requests"
 	"github.com/dl-nft-books/price-svc/resources"
-	"net/http"
-	"strconv"
-
+	"github.com/spf13/cast"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"github.com/dl-nft-books/price-svc/internal/service/requests"
+	"net/http"
 )
 
 func GetNftPrice(w http.ResponseWriter, r *http.Request) {
@@ -50,18 +49,14 @@ func GetNftPrice(w http.ResponseWriter, r *http.Request) {
 
 func getNftPrice(r *http.Request, platform, contract string) (*models.FloorPrice, error) {
 	if mockedPlatform, ok := MockedPlatforms(r)[platform]; ok {
-		tokenPrice, err := strconv.ParseFloat(mockedPlatform.PricePerOneToken, 32)
-		if err != nil {
-			return nil, err
+		tokenPrice := cast.ToFloat64(mockedPlatform.PricePerOneToken)
+		nftPrice := cast.ToFloat64(mockedPlatform.PricePerOneNft)
+		if tokenPrice > 0 && nftPrice > 0 {
+			return &models.FloorPrice{
+				NativeCurrency: float32(nftPrice) / float32(tokenPrice),
+				Usd:            float32(nftPrice),
+			}, nil
 		}
-		NftPrice, err := strconv.ParseFloat(mockedPlatform.PricePerOneNft, 32)
-		if err != nil {
-			return nil, err
-		}
-		return &models.FloorPrice{
-			NativeCurrency: float32(NftPrice) / float32(tokenPrice),
-			Usd:            float32(NftPrice),
-		}, nil
 	}
 	return Coingecko(r).GetNftPrice(platform, contract)
 }

@@ -20,8 +20,8 @@ type MockedPlatform struct {
 	ChainId          int32  `fig:"chain_id,required"`
 	Name             string `fig:"name,required"`
 	ShortName        string `fig:"short_name,required"`
-	PricePerOneToken string `fig:"price_per_one_token,required"`
-	PricePerOneNft   string `fig:"price_per_one_nft,required"`
+	PricePerOneToken string `fig:"price_per_one_token"`
+	PricePerOneNft   string `fig:"price_per_one_nft"`
 }
 
 type MockedStructures struct {

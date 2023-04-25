@@ -39,3 +39,11 @@ mocked:
       short_name: "Q"
       price_per_one_token: "1.0" # string in USD
       price_per_one_nft: "1.0" # string in USD
+    - id: "polygon-pos"
+      chain_id: 137
+      name: "Polygon POS"
+      short_name: "MATIC"
+    - id: "ethereum"
+      chain_id: 1
+      name: "Ethereum"
+      short_name: ""

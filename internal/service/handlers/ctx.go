@@ -84,12 +84,12 @@ func MockedPlatforms(r *http.Request) map[string]config.MockedPlatform {
 	return r.Context().Value(mockedPlatformsCtxKey).(map[string]config.MockedPlatform)
 }
 
-func CtxPlatforms(entry *models.Platforms) func(context.Context) context.Context {
+func CtxPlatforms(entry models.Platforms) func(context.Context) context.Context {
 	return func(ctx context.Context) context.Context {
 		return context.WithValue(ctx, platformsCtxKey, entry)
 	}
 }
 
-func Platforms(r *http.Request) *models.Platforms {
-	return r.Context().Value(platformsCtxKey).(*models.Platforms)
+func Platforms(r *http.Request) models.Platforms {
+	return r.Context().Value(platformsCtxKey).(models.Platforms)
 }

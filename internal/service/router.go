@@ -1,19 +1,17 @@
 package service
 
 import (
-	"github.com/go-chi/chi"
-	"gitlab.com/distributed_lab/ape"
+	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
 	"github.com/dl-nft-books/price-svc/internal/service/handlers"
 	"github.com/dl-nft-books/price-svc/resources"
+	"github.com/go-chi/chi"
+	"gitlab.com/distributed_lab/ape"
 )
 
 func (s *service) router() chi.Router {
 	r := chi.NewRouter()
 
-	platforms, err := s.getCoigeckoPlatforms()
-	if err != nil {
-		panic(err)
-	}
+	var platforms models.Platforms
 
 	//hardcode Q because Q has no price
 	for _, mockedPlatform := range s.mocked.Platforms {

@@ -1,14 +1,15 @@
 package handlers
 
 import (
-	"github.com/pkg/errors"
 	"github.com/dl-nft-books/price-svc/internal/data"
+	"github.com/pkg/errors"
+	"github.com/spf13/cast"
 	"net/http"
 
-	"gitlab.com/distributed_lab/ape"
-	"gitlab.com/distributed_lab/ape/problems"
 	"github.com/dl-nft-books/price-svc/internal/service/requests"
 	"github.com/dl-nft-books/price-svc/internal/service/responses"
+	"gitlab.com/distributed_lab/ape"
+	"gitlab.com/distributed_lab/ape/problems"
 )
 
 func GetPrice(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +54,9 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 }
 func getPrice(r *http.Request, platform, contract string) (string, error) {
 	if mockedPlatforms, ok := MockedPlatforms(r)[platform]; ok {
-		return mockedPlatforms.PricePerOneToken, nil
+		if cast.ToFloat64(mockedPlatforms.PricePerOneToken) > 0 {
+			return mockedPlatforms.PricePerOneToken, nil
+		}
 	}
 	return Coingecko(r).GetPrice(platform, contract, "usd")
 }
