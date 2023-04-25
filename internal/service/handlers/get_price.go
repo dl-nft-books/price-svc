@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/dl-nft-books/price-svc/internal/data"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
@@ -58,5 +59,7 @@ func getPrice(r *http.Request, platform, contract string) (string, error) {
 			return mockedPlatforms.PricePerOneToken, nil
 		}
 	}
+	fmt.Println("didn't work :(")
+	fmt.Println(MockedPlatforms(r))
 	return Coingecko(r).GetPrice(platform, contract, "usd")
 }

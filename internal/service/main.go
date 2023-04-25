@@ -11,8 +11,6 @@ import (
 
 	"github.com/dl-nft-books/price-svc/internal/config"
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
-	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
-	"github.com/dl-nft-books/price-svc/resources"
 )
 
 type service struct {
@@ -50,35 +48,4 @@ func Run(cfg config.Config) {
 	if err := newService(cfg).run(); err != nil {
 		panic(err)
 	}
-}
-
-func (s *service) getCoigeckoPlatforms() (*models.Platforms, error) {
-	platforms, err := s.coingecko.GetPlatforms()
-	if err != nil {
-		return nil, err
-	}
-
-	platformsResp := resources.PlatformListResponse{}
-	mapped := make(map[string]string)
-	for _, platform := range platforms {
-		mapped[platform.Name] = platform.ID
-		chainIdentifier := int32(platform.ChainIdentifier)
-
-		platformsResp.Data = append(platformsResp.Data, resources.Platform{
-			Key: resources.Key{
-				ID:   platform.ID,
-				Type: resources.PLATFORMS,
-			},
-			Attributes: resources.PlatformAttributes{
-				ChainIdentifier: chainIdentifier,
-				Name:            platform.Name,
-				Shortname:       platform.Shortname,
-			},
-		})
-	}
-
-	return &models.Platforms{
-		Mapped:   mapped,
-		Response: platformsResp,
-	}, nil
 }

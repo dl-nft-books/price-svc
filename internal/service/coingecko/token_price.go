@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
+	"github.com/ethereum/go-ethereum/common"
 
 	"github.com/pkg/errors"
 	"gitlab.com/distributed_lab/json-api-connector/cerrors"
@@ -98,7 +98,6 @@ func (s *Service) getPriceNative(platform, vsAsset string) (string, error) {
 	q.Set("vs_currencies", vsAsset)
 
 	parsedUrl.RawQuery = q.Encode()
-
 	err = s.connector.Get(parsedUrl, &response)
 	if err != nil {
 		if cerr, ok := err.(cerrors.Error); ok && cerr.Status() == http.StatusNotFound {

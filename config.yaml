@@ -21,6 +21,13 @@ coingecko:
   url: https://api.coingecko.com/api/v3 # https://pro-api.coingecko.com/api/v3 for paid plan
   api_key: # for paid plan
 
+update_price:
+  name: update-price
+  runner: # Period settings
+    normal_period: 5m
+    min_abnormal_period: 5m
+    max_abnormal_period: 5m
+
 mocked:
   tokens:
     - actual_address: 0xEe84b9D1F5320bC498d39C38Dd90242CE9E8fa34
