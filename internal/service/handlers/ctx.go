@@ -9,7 +9,6 @@ import (
 	"gitlab.com/distributed_lab/logan/v3"
 
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko"
-	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
 )
 
 type ctxKey int
@@ -17,7 +16,6 @@ type ctxKey int
 const (
 	logCtxKey ctxKey = iota
 	coingeckoCtxKey
-	platformsCtxKey
 	networkerCtxKey
 	mockedTokensCtxKey
 	mockedNftsCtxKey
@@ -74,22 +72,12 @@ func MockedNfts(r *http.Request) map[string]string {
 	return r.Context().Value(mockedNftsCtxKey).(map[string]string)
 }
 
-func CtxMockedPlatforms(mockedPlatforms map[string]config.MockedPlatform) func(context.Context) context.Context {
+func CtxMockedPlatforms(mockedPlatforms map[int64]config.MockedPlatform) func(context.Context) context.Context {
 	return func(ctx context.Context) context.Context {
 		return context.WithValue(ctx, mockedPlatformsCtxKey, mockedPlatforms)
 	}
 }
 
-func MockedPlatforms(r *http.Request) map[string]config.MockedPlatform {
-	return r.Context().Value(mockedPlatformsCtxKey).(map[string]config.MockedPlatform)
-}
-
-func CtxPlatforms(entry models.Platforms) func(context.Context) context.Context {
-	return func(ctx context.Context) context.Context {
-		return context.WithValue(ctx, platformsCtxKey, entry)
-	}
-}
-
-func Platforms(r *http.Request) models.Platforms {
-	return r.Context().Value(platformsCtxKey).(models.Platforms)
+func MockedPlatforms(r *http.Request) map[int64]config.MockedPlatform {
+	return r.Context().Value(mockedPlatformsCtxKey).(map[int64]config.MockedPlatform)
 }

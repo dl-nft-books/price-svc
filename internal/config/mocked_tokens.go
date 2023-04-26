@@ -17,9 +17,7 @@ type MockedToken struct {
 }
 type MockedPlatform struct {
 	Id               string `fig:"id,required"`
-	ChainId          int32  `fig:"chain_id,required"`
-	Name             string `fig:"name,required"`
-	ShortName        string `fig:"short_name,required"`
+	ChainId          int64  `fig:"chain_id,required"`
 	PricePerOneToken string `fig:"price_per_one_token"`
 	PricePerOneNft   string `fig:"price_per_one_nft"`
 }
@@ -27,7 +25,7 @@ type MockedPlatform struct {
 type MockedStructures struct {
 	Tokens    map[string]string
 	Nfts      map[string]string
-	Platforms map[string]MockedPlatform
+	Platforms map[int64]MockedPlatform
 }
 
 func (c *config) Mocked() MockedStructures {
@@ -40,7 +38,7 @@ func (c *config) Mocked() MockedStructures {
 		result := MockedStructures{
 			Tokens:    make(map[string]string),
 			Nfts:      make(map[string]string),
-			Platforms: make(map[string]MockedPlatform),
+			Platforms: make(map[int64]MockedPlatform),
 		}
 
 		if err := figure.
@@ -58,7 +56,7 @@ func (c *config) Mocked() MockedStructures {
 			result.Nfts[mockedNft.ActualAddress] = mockedNft.CoingeckoAddress
 		}
 		for _, mockedPlatform := range cfg.MockedPlatforms {
-			result.Platforms[mockedPlatform.Id] = mockedPlatform
+			result.Platforms[mockedPlatform.ChainId] = mockedPlatform
 		}
 		return result
 	}).(MockedStructures)

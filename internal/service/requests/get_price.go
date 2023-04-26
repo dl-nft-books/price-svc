@@ -8,7 +8,6 @@ import (
 )
 
 type GetPriceRequest struct {
-	Platform string `url:"platform"`
 	Contract string `url:"contract"`
 	ChainId  int64  `url:"chain_id"`
 }
@@ -25,7 +24,6 @@ func NewGetPriceRequest(r *http.Request) (GetPriceRequest, error) {
 
 func (r *GetPriceRequest) Validate() error {
 	return validation.Errors{
-		"platform=": validation.Validate(r.Platform, validation.Required),
 		"chain_id=": validation.Validate(r.ChainId, validation.Required),
 	}.Filter()
 }

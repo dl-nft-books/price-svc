@@ -1,8 +1,7 @@
 package models
 
 type FloorPrice struct {
-	NativeCurrency float32 `json:"native_currency"`
-	Usd            float32 `json:"usd"`
+	Usd float64 `json:"usd"`
 }
 
 type NftResponse struct {

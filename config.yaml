@@ -21,13 +21,6 @@ coingecko:
   url: https://api.coingecko.com/api/v3 # https://pro-api.coingecko.com/api/v3 for paid plan
   api_key: # for paid plan
 
-update_price:
-  name: update-price
-  runner: # Period settings
-    normal_period: 5m
-    min_abnormal_period: 5m
-    max_abnormal_period: 5m
-
 mocked:
   tokens:
     - actual_address: 0xEe84b9D1F5320bC498d39C38Dd90242CE9E8fa34
@@ -41,16 +34,10 @@ mocked:
       coingecko_address: 0x6609e542e0626bc3fc2110f0ead172030fbe97ab # ethereum platform
   platforms:
     - id: "q"
-      chain_id: 35441
-      name: "Q"
-      short_name: "Q"
+      chain_id: 35443
       price_per_one_token: "1.0" # string in USD
       price_per_one_nft: "1.0" # string in USD
     - id: "polygon-pos"
-      chain_id: 137
-      name: "Polygon POS"
-      short_name: "MATIC"
+      chain_id: 80001
     - id: "ethereum"
       chain_id: 1
-      name: "Ethereum"
-      short_name: ""

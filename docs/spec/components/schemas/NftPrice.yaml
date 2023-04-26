@@ -7,13 +7,9 @@ allOf:
       attributes:
         type: object
         required:
-          - native_currency
-          - usd
+          - floor_price
         properties:
-          native_currency:
-            type: float
-            description: price of NFT in native currency
-            example: 0.005
-          usd:
+          floor_price:
+            type: string
             description: price of NFT in $
-            type: float
+            example: "0.005"

@@ -13,7 +13,7 @@ const (
 	priceEndpoint = "pricer/price"
 )
 
-func (c *Connector) GetPrice(platform, contract string, chainId int64) (models.PriceResponse, error) {
+func (c *Connector) GetPrice(contract string, chainId int64) (models.PriceResponse, error) {
 	var response models.PriceResponse
 
 	parsedUrl, err := url.Parse(priceEndpoint)
@@ -22,7 +22,6 @@ func (c *Connector) GetPrice(platform, contract string, chainId int64) (models.P
 	}
 
 	query := parsedUrl.Query()
-	query.Set("platform", platform)
 	query.Set("contract", contract)
 	query.Set("chain_id", strconv.FormatInt(chainId, 10))
 	parsedUrl.RawQuery = query.Encode()

@@ -7,8 +7,6 @@ import (
 	"time"
 
 	"github.com/dl-nft-books/price-svc/internal/service/coingecko/models"
-	"github.com/ethereum/go-ethereum/common"
-
 	"github.com/pkg/errors"
 	"gitlab.com/distributed_lab/json-api-connector/cerrors"
 )
@@ -21,13 +19,11 @@ const (
 	nativeMaticId      = "matic-network"
 )
 
-func (s *Service) GetTokenContractInfo(address common.Address) {
-}
-
 func (s *Service) GetPrice(platform, contract, vsAsset string) (string, error) {
 	priceKey := fmt.Sprintf(priceKeyFormat, platform, contract, vsAsset)
 
 	if price, ok := s.priceCache[priceKey]; ok && price.ExpiresAt.Add(s.cacheExpiration).After(time.Now().UTC()) {
+		fmt.Println("Get from cache")
 		return price.Price, nil
 	}
 
@@ -50,6 +46,8 @@ func (s *Service) GetPrice(platform, contract, vsAsset string) (string, error) {
 		Price:     price,
 		ExpiresAt: time.Now().UTC().Add(s.cacheExpiration),
 	}
+	fmt.Println(fmt.Sprintf("Set new price for %v in %v", platform, s.priceCache[priceKey].ExpiresAt.Format("02 Jan 2006 3:04:05 pm")))
+	fmt.Println("CachePlatforms", s.priceCache)
 
 	return price, nil
 }
@@ -106,7 +104,5 @@ func (s *Service) getPriceNative(platform, vsAsset string) (string, error) {
 		return "", errors.Wrap(err, "failed to get price")
 	}
 
-	price := response.GetPrice(platform, vsAsset)
-
-	return price, err
+	return response.GetPrice(platform, vsAsset), err
 }

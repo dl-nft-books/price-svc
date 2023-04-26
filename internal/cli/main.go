@@ -1,14 +1,12 @@
 package cli
 
 import (
-	"context"
 	"github.com/alecthomas/kingpin"
 	"gitlab.com/distributed_lab/kit/kv"
 	"gitlab.com/distributed_lab/logan/v3"
 
 	"github.com/dl-nft-books/price-svc/internal/config"
 	"github.com/dl-nft-books/price-svc/internal/service"
-	updatePricer "github.com/dl-nft-books/price-svc/internal/service/runners"
 )
 
 func Run(args []string) bool {
@@ -26,8 +24,7 @@ func Run(args []string) bool {
 	app := kingpin.New("price-svc", "")
 
 	runCmd := app.Command("run", "run command")
-	serviceCmd := runCmd.Command("service", "run service")                  // you can insert custom help
-	updatePricerCmd := runCmd.Command("update-pricer", "run update-pricer") // you can insert custom help
+	serviceCmd := runCmd.Command("service", "run service") // you can insert custom help
 
 	// custom commands go here...
 
@@ -40,9 +37,6 @@ func Run(args []string) bool {
 	switch cmd {
 	case serviceCmd.FullCommand():
 		service.Run(cfg)
-	case updatePricerCmd.FullCommand():
-		log.Info("started promocode_checker...")
-		updatePricer.RunUpdatePricer(context.Background(), cfg)
 	// handle any custom commands here in the same way
 	default:
 		log.Errorf("unknown command %s", cmd)

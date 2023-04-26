@@ -17,7 +17,6 @@ type Config interface {
 
 	Coingecko() *coingecko.Service
 	Mocked() MockedStructures
-	UpdatePricer
 
 	networker.NetworkConfigurator
 }
@@ -28,10 +27,8 @@ type config struct {
 	comfig.Listenerer
 
 	getter           kv.Getter
-	ethererOnce      comfig.Once
 	coingecko        comfig.Once
 	mockedTokensOnce comfig.Once
-	UpdatePricer
 	networker.NetworkConfigurator
 }
 
@@ -42,6 +39,5 @@ func New(getter kv.Getter) Config {
 		Listenerer:          comfig.NewListenerer(getter),
 		Logger:              comfig.NewLogger(getter, comfig.LoggerOpts{}),
 		NetworkConfigurator: networker.NewNetworkConfigurator(getter),
-		UpdatePricer:        NewUpdatePricer(getter),
 	}
 }

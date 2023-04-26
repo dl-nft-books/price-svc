@@ -3,6 +3,7 @@ package connector
 import (
 	"github.com/pkg/errors"
 	"net/url"
+	"strconv"
 
 	"github.com/dl-nft-books/price-svc/connector/models"
 )
@@ -11,7 +12,7 @@ const (
 	nftPriceEndpoint = "pricer/nft"
 )
 
-func (c *Connector) GetNftPrice(platform, contract string) (models.NftPriceResponse, error) {
+func (c *Connector) GetNftPrice(contract string, chainId int64) (models.NftPriceResponse, error) {
 	var response models.NftPriceResponse
 
 	parsedUrl, err := url.Parse(nftPriceEndpoint)
@@ -20,7 +21,7 @@ func (c *Connector) GetNftPrice(platform, contract string) (models.NftPriceRespo
 	}
 
 	query := parsedUrl.Query()
-	query.Set("platform", platform)
+	query.Set("chain_id", strconv.FormatInt(chainId, 10))
 	query.Set("contract", contract)
 	parsedUrl.RawQuery = query.Encode()
 
