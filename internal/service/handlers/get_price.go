@@ -2,9 +2,10 @@ package handlers
 
 import (
 	"github.com/dl-nft-books/price-svc/internal/config"
-	"github.com/dl-nft-books/price-svc/internal/data"
+	"github.com/dl-nft-books/price-svc/internal/service/eth_reader"
 	"github.com/dl-nft-books/price-svc/internal/service/requests"
 	"github.com/dl-nft-books/price-svc/internal/service/responses"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
 	"gitlab.com/distributed_lab/ape"
@@ -51,11 +52,16 @@ func GetPrice(w http.ResponseWriter, r *http.Request) {
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
-	ape.Render(w, responses.GetPriceResponse(price, key, data.Erc20Data{
-		Name:     networker.TokenName,
-		Symbol:   networker.TokenSymbol,
-		Decimals: int32(networker.Decimals),
-	}))
+	ethReader := eth_reader.NewEthReader(networker)
+
+	erc20Data, err := ethReader.GetErc20Data(common.HexToAddress(request.Contract))
+	if err != nil {
+		Log(r).Error(errors.Wrap(err, "failed to get erc20 data"))
+		ape.RenderErr(w, problems.InternalError())
+		return
+	}
+
+	ape.Render(w, responses.GetPriceResponse(price, key, *erc20Data))
 }
 func getPrice(r *http.Request, platform config.MockedPlatform, contract string) (string, error) {
 	if cast.ToFloat64(platform.PricePerOneToken) > 0 {
